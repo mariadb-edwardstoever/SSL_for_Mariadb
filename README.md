@@ -4,27 +4,30 @@
 Created February, 2025 
 
 ##### ATTENTION ######
+```
 It is assumed you have a basic knowledge of Linux system administration.
 It is assumed you have a basic knowledge of how a MariaDB database and Maxscale are administered. 
 The commands in this project are written as scripts for the bash command line.
 If you do not have the experience to understand the bash scripts and commands herein, 
 you should take the time to learn them in a test environment.
+```
 
-RE: Support tickets CS0755469, 211733
 # INSTRUCTIONS
 
 Begin by changing directory into your linux distribution (REDHAT or DEBIAN) and running the script step_1.sh
 ```
 ./step_1.sh
 ```
-That copies the file `vars.sh` into the current working directory. _Edit the file._  Each option in the file is fully explained. Make changes where necessary. 
+That copies the file `vars.sh` into the current working directory.
+### Edit the vars.sh file that is copied into the working directory.
+Each option in the file is fully explained. Make changes where necessary. 
 
 Next run the script step_2.sh
 ```
 ./step_2.sh
 ```
 
-## Edit the cfg files that are copied into the working directory.
+### Edit the cfg files that are copied into the working directory.
 
 ### OWN_org_details.cfg
 This file is where you will put details about your own organization.
@@ -45,4 +48,5 @@ Next, run the script step_4.sh. If created your own CA Certificate, you will nee
 ./step_4.sh
 ```
 
+RE: Support tickets CS0755469, 211733
 
