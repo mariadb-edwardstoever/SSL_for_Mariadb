@@ -1,0 +1,3 @@
+Certificates generated using scripts by Edward Stoever for Mariadb Support.
+https://github.com/mariadb-edwardstoever/SSL_for_Mariadb
+
