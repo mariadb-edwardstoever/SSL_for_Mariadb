@@ -64,10 +64,10 @@ in /etc/hosts the following curl command should work without error:
 curl  https://maxscale.widgets-and-gadgetsx.com:8989
 
 If you add the file myCA.pem into the trusted root certificates on your work-station, your browser will be able 
-to open the URL https://maxscale.widgets-and-gadgetsx.com:8989 without warining that the connection is not secure.
+to open the URL https://maxscale.widgets-and-gadgetsx.com:8989 without warning that the connection is not secure.
 The initial user/password for login to the admin GUI is admin/mariadb.
 
-
+After you have the admin GUI running properly, you can 
 
 
 
