@@ -3,6 +3,9 @@
 ### Notes by Edward Stoever for Mariadb Support
 Created February, 2025 
 
+# THIS PROJECT SHOULD BE READY BY FEBRUARY 22, 2024 
+
+
 ##### ATTENTION ######
 ```
 It is assumed you have a basic knowledge of Linux system administration.
