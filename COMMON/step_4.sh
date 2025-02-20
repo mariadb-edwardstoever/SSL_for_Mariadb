@@ -204,9 +204,9 @@ if [ "$GENERATE_SERVER_CERTIFICATE" == "YES" ]; then
 
 
    if [ "${INCLUDE_SERVERAUTH_FLAG}" == "YES" ]; then
-     printf "authorityKeyIdentifier=keyid,issuer\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment\nextendedKeyUsage=serverAuth\n" > tmp_ext.cfg
+     printf "extendedKeyUsage=serverAuth\n$(cat OWN_all-purpose_extensions.cfg)" > tmp_ext.cfg
    else
-     printf "authorityKeyIdentifier=keyid,issuer\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment\n" > tmp_ext.cfg
+     printf "$(cat OWN_all-purpose_extensions.cfg)" > tmp_ext.cfg
    fi 
 
    if [ $PROVIDED_KEY_IN_USE ]; then
@@ -278,9 +278,9 @@ if [ "$GENERATE_CLIENT_CERTIFICATE" == "YES" ]; then
 
 
    if [ "${INCLUDE_CLIENTAUTH_FLAG}" == "YES" ]; then
-     printf "authorityKeyIdentifier=keyid,issuer\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment\nextendedKeyUsage=clientAuth\n" > tmp_ext.cfg
+     printf "extendedKeyUsage=clientAuth\n$(cat OWN_all-purpose_extensions.cfg)" > tmp_ext.cfg
    else
-     printf "authorityKeyIdentifier=keyid,issuer\nbasicConstraints=CA:FALSE\nkeyUsage=digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment\n" > tmp_ext.cfg
+     printf "$(cat OWN_all-purpose_extensions.cfg)" > tmp_ext.cfg
    fi 
 
    if [ $PROVIDED_KEY_IN_USE ]; then
