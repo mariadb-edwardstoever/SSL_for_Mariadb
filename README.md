@@ -15,13 +15,14 @@ wget https://github.com/mariadb-edwardstoever/SSL_for_Mariadb/archive/refs/heads
 ```
 
 ## Overview
-The goal of this project is to make the task of generating one or more certificates for your Mariadb installations as easy as possible regardless of your experience level.
+The goal of this project is to make the task of generating one or more certificates for your Mariadb installations as easy as possible.
 
 ## Important items to be aware of
 * Transport Layer Security (TLS) was formerly known as Secure Socket Layer (SSL). The program for creating scripts is "openssl". Thus the terms SSL and TLS are often used interchangeably, even though _technically_ TLS is a more modern and more secure protocol.
-* This project will help you to create singed certificates for the connections on your private network (intranet). It will be easy for you to make the CA certificate provided in the project trusted by your hosts like any distributed CA certificate.
+* This project will help you to create signed certificates for the connections on your private network (intranet). It will be easy for you to make the CA certificate provided in the project trusted by your hosts.
 * By using this project to create your certificates for SSL/TLS, you will not have to share the subdomains of your intranet on the open internet.
-* Starting from 11.4, MariaDB server enables TLS automatically. Certificates are generated on startup and only stored in memory. Certificate verification is enabled by default on the client side and certificates are verified if the authentication plugin itself is MitM safe (mysql_native_password, ed25519, parsec).
+* Starting from 11.4, MariaDB server enables TLS automatically. Certificates are generated on startup and only stored in memory. Certificate verification is enabled by default on the client side and certificates are verified if the authentication plugin itself is MitM safe (mysql_native_password, ed25519, parsec). If you are using 11.4 software or higher, your connections to the database are already secure without having to generate and manage certificates on the server.
+* Even with the advent of 11.4, there are good reasons to have and use TLS certificates, such as for maxscale or clients that do not generate a certificate on the fly. 
 
 # INSTRUCTIONS
 
