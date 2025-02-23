@@ -1,19 +1,27 @@
-# SSL in Maxscale and Replication
+# SSL/TLS for Mariadb
 
-### Notes by Edward Stoever for Mariadb Support
 Created February, 2025 
 
-# THIS PROJECT SHOULD BE READY BY FEBRUARY 24, 2024 
+## THIS PROJECT SHOULD BE READY BY FEBRUARY 24, 2024 
 
 
-##### ATTENTION ######
+
+To download the mariadb_quick_review script direct to your linux server, you may use git or wget:
 ```
-It is assumed you have a basic knowledge of Linux system administration.
-It is assumed you have a basic knowledge of how a MariaDB database and Maxscale are administered. 
-The commands in this project are written as scripts for the bash command line.
-If you do not have the experience to understand the bash scripts and commands herein, 
-you should take the time to learn them in a test environment.
+git clone https://github.com/mariadb-edwardstoever/SSL_for_Mariadb.git
 ```
+```
+wget https://github.com/mariadb-edwardstoever/SSL_for_Mariadb/archive/refs/heads/master.zip
+```
+
+## Overview
+The goal of this project is to make the task of generating one or more certificates for your Mariadb installations as easy as possible regardless of your experience level.
+
+## Important items to be aware of
+* Transport Layer Security (TLS) was formerly known as Secure Socket Layer (SSL). The program for creating scripts is "openssl". Thus the terms SSL and TLS are often used interchangeably, even though _technically_ TLS is a more modern and more secure protocol.
+* This project will help you to create singed certificates for the connections on your private network (intranet). It will be easy for you to make the CA certificate provided in the project trusted by your hosts like any distributed CA certificate.
+* By using this project to create your certificates for SSL/TLS, you will not have to share the subdomains of your intranet on the open internet.
+* Starting from 11.4, MariaDB server enables TLS automatically. Certificates are generated on startup and only stored in memory. Certificate verification is enabled by default on the client side and certificates are verified if the authentication plugin itself is MitM safe (mysql_native_password, ed25519, parsec).
 
 # INSTRUCTIONS
 
