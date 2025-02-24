@@ -16,7 +16,7 @@ if [ "$(basename $SCRIPT_DIR)" == "COMMON" ]; then
 fi
 
 
-if [ "$(cat vars.sh | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "096a20b1c9b30dbb24922f2ee93f3b01" ]; then
+if [ "$(cat vars.sh | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5VARS_SH}" ]; then
   TEMP_COLOR=lred; print_color "vars.sh has not been edited.\nYou definitely want to edit that file.\nPress ";
   TEMP_COLOR=lcyan; print_color "c";
   TEMP_COLOR=lred; print_color " to continue with a fantasy company name or any other key to exit.\n"; unset TEMP_COLOR;
@@ -27,22 +27,22 @@ fi
 
 if [ ! "$USE_PROVIDED_CA" == "YES" ]; then
   if [ -f CA_configuration.cfg ]; then
-    if [ ! "$(cat CA_configuration.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "d1b5e8e0f709536916d377696208a325" ]; then
+    if [ ! "$(cat CA_configuration.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5CACONFI}" ]; then
         TEMP_COLOR=lcyan; print_color  "The file CA_configuration.cfg has been edited. It will not be overwritten.\n" unset TEMP_COLOR;
         CA_CONFIGURATION_EDITED=TRUE
     fi 
   fi
 fi
 
-if [ -f OWN_all-purpose_extensions.cfg ]; then
-  if [ ! "$(cat OWN_all-purpose_extensions.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "fd45330401b89347addaee02dceb7841" ]; then
-    TEMP_COLOR=lcyan; print_color  "The file OWN_all-purpose_extensions.cfg has been edited. It will not be overwritten.\n" unset TEMP_COLOR;
+if [ -f OWN_extensions.cfg ]; then
+  if [ ! "$(cat OWN_extensions.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5OWNEXTN}" ]; then
+    TEMP_COLOR=lcyan; print_color  "The file OWN_extensions.cfg has been edited. It will not be overwritten.\n" unset TEMP_COLOR;
     OWN_ALL_PURPOSE_EXTENSIONS_EDITED=TRUE
   fi
 fi
 
 if [ -f OWN_org_details.cfg ]; then
-  if [ ! "$(cat OWN_org_details.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "f91a183804da859620e5c1ef6e4dfb52" ]; then
+  if [ ! "$(cat OWN_org_details.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5OWNORGD}" ]; then
     TEMP_COLOR=lcyan; print_color  "The file OWN_org_details.cfg has been edited. It will not be overwritten.\n" unset TEMP_COLOR;
     OWN_ORG_DETAILS_EDITED=TRUE
   fi
@@ -55,9 +55,9 @@ if [ ! $CA_CONFIGURATION_EDITED ] && [ ! "$USE_PROVIDED_CA" == "YES" ]; then
 fi
 
 if [ ! $OWN_ALL_PURPOSE_EXTENSIONS_EDITED ] && [ "$GENERATE_ALL_PURPOSE_CERTIFICATE" == "YES" ]; then
-  TEMP_COLOR=lcyan; print_color "Copying OWN_all-purpose_extensions.cfg. "; 
+  TEMP_COLOR=lcyan; print_color "Copying OWN_extensions.cfg. "; 
   TEMP_COLOR=lred; print_color "This file should be edited before you continue.\n"; unset TEMP_COLOR;
-  cp ../COMMON/OWN_all-purpose_extensions.cfg .
+  cp ../COMMON/OWN_extensions.cfg .
 fi 
 
 if [ ! $OWN_ORG_DETAILS_EDITED ]; then

@@ -15,3 +15,10 @@ fi
 function get_linux_type () {
   LINUX_TYPE=$(cat /etc/os-release | grep PRETTY |cut -d\" -f2 | head -c 7 | sed "s/ //g"| tr '[:lower:]' '[:upper:]')
 }
+
+MD5MYCAKEY="24a044e4a0d8e0467105cb6a3784401d" # myCA.key
+MD5OWNORGD="f91a183804da859620e5c1ef6e4dfb52" # OWN_org_details.cfg
+MD5OWNEXTN="e49d92c75fb1547bf7c4e090c7533005" # OWN_extensions.cfg
+MD5CACONFI="d1b5e8e0f709536916d377696208a325" # CA_configuration.cfg
+MD5VARS_SH="096a20b1c9b30dbb24922f2ee93f3b01" # vars.sh
+

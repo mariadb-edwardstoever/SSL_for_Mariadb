@@ -1,0 +1,1 @@
+../COMMON/report_current_md5sums.sh

@@ -72,7 +72,7 @@ if [ ! -f ${MY_ORGANIZATION}.key ]; then
 exit 0
 fi
 
-if [ "$(cat OWN_org_details.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "f91a183804da859620e5c1ef6e4dfb52" ]; then
+if [ "$(cat OWN_org_details.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5OWNORGD}" ]; then
   TEMP_COLOR=lred; print_color "OWN_org_details.cfg has not been edited.\nYou definitely want to edit that file.\nPress "; 
   TEMP_COLOR=lcyan; print_color "c"; 
   TEMP_COLOR=lred; print_color " to continue with a fantasy company name or any other key to exit.\n"; unset TEMP_COLOR;
@@ -99,8 +99,8 @@ fi
 
 echo "---"
 
-   if [ "$(cat OWN_all-purpose_extensions.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "fd45330401b89347addaee02dceb7841" ]; then
-     TEMP_COLOR=lred; print_color "OWN_all-purpose_extensions.cfg has not been edited.\nYou definitely want to edit the DNS.1 section of that file.\nPress "; 
+   if [ "$(cat OWN_extensions.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5OWNEXTN}" ]; then
+     TEMP_COLOR=lred; print_color "OWN_extensions.cfg has not been edited.\nYou definitely want to edit the DNS.1 section of that file.\nPress "; 
      TEMP_COLOR=lcyan; print_color "c"; 
      TEMP_COLOR=lred; print_color " to continue with a fantasy company name or any other key to exit.\n"; unset TEMP_COLOR;
      read -s -n 1 RESPONSE
@@ -132,17 +132,17 @@ echo "---"
 
    echo "---"
 
-   if [ "$(md5sum myCA.key | awk '{print $1}')" == "24a044e4a0d8e0467105cb6a3784401d" ]; then
+   if [ "$(md5sum myCA.key | awk '{print $1}')" == "${MD5MYCAKEY}" ]; then
      PROVIDED_KEY_IN_USE=TRUE;
    fi
 
    TEMP_COLOR=lcyan; print_color "Creating a Signed Certificate for your organization.\n"; unset TEMP_COLOR; 
 
    if [ $PROVIDED_KEY_IN_USE ]; then
-     openssl x509 -req -in ${MY_ORGANIZATION}.csr -CA myCA.pem -CAkey myCA.key -CAcreateserial -out ${MY_ORGANIZATION}.crt -days ${HOW_MANY_DAYS_VALID} -sha256 -extfile OWN_all-purpose_extensions.cfg -passin pass:mariadb || ERR=true
+     openssl x509 -req -in ${MY_ORGANIZATION}.csr -CA myCA.pem -CAkey myCA.key -CAcreateserial -out ${MY_ORGANIZATION}.crt -days ${HOW_MANY_DAYS_VALID} -sha256 -extfile OWN_extensions.cfg -passin pass:mariadb || ERR=true
    else
      TEMP_COLOR=lcyan; print_color "You will need to type the pass phrase for myCA.key.\n"; unset TEMP_COLOR;
-     openssl x509 -req -in ${MY_ORGANIZATION}.csr -CA myCA.pem -CAkey myCA.key -CAcreateserial -out ${MY_ORGANIZATION}.crt -days ${HOW_MANY_DAYS_VALID} -sha256 -extfile OWN_all-purpose_extensions.cfg || ERR=true
+     openssl x509 -req -in ${MY_ORGANIZATION}.csr -CA myCA.pem -CAkey myCA.key -CAcreateserial -out ${MY_ORGANIZATION}.crt -days ${HOW_MANY_DAYS_VALID} -sha256 -extfile OWN_extensions.cfg || ERR=true
    fi
 
    if [ $ERR ]; then
@@ -196,7 +196,7 @@ if [ "$GENERATE_SERVER_CERTIFICATE" == "YES" ]; then
 
    echo "---"
 
-   if [ "$(md5sum myCA.key | awk '{print $1}')" == "24a044e4a0d8e0467105cb6a3784401d" ]; then
+   if [ "$(md5sum myCA.key | awk '{print $1}')" == "${MD5MYCAKEY}" ]; then
      PROVIDED_KEY_IN_USE=TRUE;
    fi
 
@@ -204,9 +204,9 @@ if [ "$GENERATE_SERVER_CERTIFICATE" == "YES" ]; then
 
 
    if [ "${INCLUDE_SERVERAUTH_FLAG}" == "YES" ]; then
-     printf "extendedKeyUsage=serverAuth\n$(cat OWN_all-purpose_extensions.cfg)" > tmp_ext.cfg
+     printf "extendedKeyUsage=serverAuth\n$(cat OWN_extensions.cfg)" > tmp_ext.cfg
    else
-     printf "$(cat OWN_all-purpose_extensions.cfg)" > tmp_ext.cfg
+     printf "$(cat OWN_extensions.cfg)" > tmp_ext.cfg
    fi 
 
    if [ $PROVIDED_KEY_IN_USE ]; then
@@ -270,7 +270,7 @@ if [ "$GENERATE_CLIENT_CERTIFICATE" == "YES" ]; then
 
    echo "---"
 
-   if [ "$(md5sum myCA.key | awk '{print $1}')" == "24a044e4a0d8e0467105cb6a3784401d" ]; then
+   if [ "$(md5sum myCA.key | awk '{print $1}')" == "${MD5MYCAKEY}" ]; then
      PROVIDED_KEY_IN_USE=TRUE;
    fi
 
@@ -278,9 +278,9 @@ if [ "$GENERATE_CLIENT_CERTIFICATE" == "YES" ]; then
 
 
    if [ "${INCLUDE_CLIENTAUTH_FLAG}" == "YES" ]; then
-     printf "extendedKeyUsage=clientAuth\n$(cat OWN_all-purpose_extensions.cfg)" > tmp_ext.cfg
+     printf "extendedKeyUsage=clientAuth\n$(cat OWN_extensions.cfg)" > tmp_ext.cfg
    else
-     printf "$(cat OWN_all-purpose_extensions.cfg)" > tmp_ext.cfg
+     printf "$(cat OWN_extensions.cfg)" > tmp_ext.cfg
    fi 
 
    if [ $PROVIDED_KEY_IN_USE ]; then

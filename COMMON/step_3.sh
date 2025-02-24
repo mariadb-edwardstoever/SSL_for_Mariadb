@@ -34,7 +34,7 @@ if [ ! -f CA_configuration.cfg ]; then
 fi
 
 
-if [ "$(cat CA_configuration.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "d1b5e8e0f709536916d377696208a325" ]; then
+if [ "$(cat CA_configuration.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5CACONFI}" ]; then
   TEMP_COLOR=lred; print_color "CA_configuration.cfg has not been edited.\nYou may want to edit that file.\nPress ";
   TEMP_COLOR=lcyan; print_color "c";
   TEMP_COLOR=lred; print_color " to continue with the fantasy company name in that file or press any other key to exit.\n"; unset TEMP_COLOR;
@@ -79,7 +79,7 @@ if [ -f myCA.pem ]; then
 exit 0
 fi
 
-if [ "$(cat CA_configuration.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "2478dabce271059d5f8cb818166fd524" ]; then
+if [ "$(cat CA_configuration.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5CACONFI}" ]; then
   TEMP_COLOR=lred; print_color "CA_configuration.cfg has not been edited.\nIt is not necessary to edit the file, but you may want to.\nPress "; 
   TEMP_COLOR=lcyan; print_color "c"; 
   TEMP_COLOR=lred; print_color " to continue anyway or any other key to exit.\n"; unset TEMP_COLOR;

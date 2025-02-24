@@ -45,7 +45,7 @@ Next run the script step_2.sh
 This file is where you will put details about your own organization.
 
 ### OWN_all-purpose_extensions.cfg
-If you create an all-purpose certificate, edit this file so that the DNS.1 equals a wildcard of your domain. For example, change `*.widgets-and-gadgets.com` to a wildcard for the domain that you will use for https browser connections. This will be useful for maxscale Admin GUI.
+Edit this file so that the DNS.1 equals a wildcard of your domain. For example, change `*.widgets-and-gadgets.com` to a wildcard for the domain that you will use for https browser connections. 
 
 ### CA_configuration.cfg
 If you create your own CA Certificate, you can edit this file to generate a Certificate Authority organization that you want. It is recommended that the organization not match your own organization so as not to appear self-signed.

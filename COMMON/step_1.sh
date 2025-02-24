@@ -12,7 +12,7 @@ if [ "$(basename $SCRIPT_DIR)" == "COMMON" ]; then
 fi
 
 if [ -f vars.sh ]; then
-  if [ ! "$(cat vars.sh | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "096a20b1c9b30dbb24922f2ee93f3b01" ]; then
+  if [ ! "$(cat vars.sh | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5VARS_SH}" ]; then
         TEMP_COLOR=lcyan; print_color  "The file vars.sh has been edited. It will not be overwritten.\n" unset TEMP_COLOR;
         VARS_EDITED=TRUE
   fi
