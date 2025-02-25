@@ -21,13 +21,14 @@ The goal of this project is to make the task of generating one or more certifica
 * Even with the advent of 11.4, there are good reasons to use TLS certificates, such as for maxscale. 
 
 ## Test that required software is installed on the server.
+Begin by changing directory into your linux distribution (REDHAT or DEBIAN) and run the script test_required_software.sh
 ```
 ./test_required_software.sh
 ```
 
 # INSTRUCTIONS
 
-Begin by changing directory into your linux distribution (REDHAT or DEBIAN) and running the script step_1.sh
+Run the script step_1.sh
 ```
 ./step_1.sh
 ```

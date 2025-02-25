@@ -21,10 +21,10 @@ if [ "$LINUX_TYPE" == "REDHAT" ]; then
 else
   INSTALL_CLIENT="apt install mariadb-client"
 fi
-KEYFILE=$(ls $PUBLISH_DIR/$MY_ORGANIZATION.key)
-ALLPURPOSEPEM=$(ls $PUBLISH_DIR/$MY_ORGANIZATION.pem)
-CLIENTPEM=$(ls $PUBLISH_DIR/client_$MY_ORGANIZATION.pem)
-SERVERPEM=$(ls $PUBLISH_DIR/server_$MY_ORGANIZATION.pem)
+KEYFILE=$(ls $PUBLISH_DIR/$MY_ORGANIZATION.key 2>/dev/null)
+ALLPURPOSEPEM=$(ls $PUBLISH_DIR/$MY_ORGANIZATION.pem 2>/dev/null)
+CLIENTPEM=$(ls $PUBLISH_DIR/client_$MY_ORGANIZATION.pem 2>/dev/null)
+SERVERPEM=$(ls $PUBLISH_DIR/server_$MY_ORGANIZATION.pem 2>/dev/null)
 
 if [ ! $SERVERPEM ] && [ ! $ALLPURPOSEPEM ]; then echo "NO AVAILABLE PEM!"; exit 1; fi
 
