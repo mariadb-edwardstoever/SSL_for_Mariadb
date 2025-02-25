@@ -17,14 +17,15 @@ source ${SCRIPT_DIR}/../functions.sh
 get_linux_type
 
 OUTPUT="
-You can use the same certificates that you created on all Linux servers. You don't have to create them again.
-So, now, copy the certificates to other hosts where you intend to use them.
+You can use the certificates in ${PUBLISH_DIR} on other Linux servers in your environment. 
+You can use script ${PUBLISH_DIR}/add_CA_to_host_trust_store.sh to add the CA to the trusted certificates of any host.
 
-# Assuming the remote host is e177.edw.ee, use ssh to create the same directory structure on the remote host:
+# Example of the ssh command to the create same directory structure on the remote host:
 ssh root@e177.edw.ee mkdir -p $PUBLISH_DIR/HOW_TO
 
-# Use scp to copy all of the contents of $PUBLISH_DIR and its subdirectories to the remote host:
+# Example of the scp command to copy contents of $PUBLISH_DIR and its subdirectories to the remote host:
 scp -r $PUBLISH_DIR/* root@e177.edw.ee:$PUBLISH_DIR/
+
 "
 
 printf "${OUTPUT}"

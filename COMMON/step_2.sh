@@ -11,12 +11,14 @@ fi
 source ${SCRIPT_DIR}/functions.sh
 source ${SCRIPT_DIR}/vars.sh
 
+get_current_md5s
+
 if [ "$(basename $SCRIPT_DIR)" == "COMMON" ]; then
   TEMP_COLOR=lred; print_color "Do not run scripts from the COMMON directory. "; unset TEMP_COLOR; print_color "Exiting.\n\n"; exit 1;
 fi
 
 
-if [ "$(cat vars.sh | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5VARS_SH}" ]; then
+if [ "${CURR_MD5VARS_SH}" == "${MD5VARS_SH}" ]; then
   TEMP_COLOR=lred; print_color "vars.sh has not been edited.\nYou definitely want to edit that file.\nPress ";
   TEMP_COLOR=lcyan; print_color "c";
   TEMP_COLOR=lred; print_color " to continue with a fantasy company name or any other key to exit.\n"; unset TEMP_COLOR;
@@ -27,7 +29,7 @@ fi
 
 if [ ! "$USE_PROVIDED_CA" == "YES" ]; then
   if [ -f CA_configuration.cfg ]; then
-    if [ ! "$(cat CA_configuration.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5CACONFI}" ]; then
+    if [ ! "${CURR_MD5CACONFI}" == "${MD5CACONFI}" ]; then
         TEMP_COLOR=lcyan; print_color  "The file CA_configuration.cfg has been edited. It will not be overwritten.\n" unset TEMP_COLOR;
         CA_CONFIGURATION_EDITED=TRUE
     fi 
@@ -35,14 +37,14 @@ if [ ! "$USE_PROVIDED_CA" == "YES" ]; then
 fi
 
 if [ -f OWN_extensions.cfg ]; then
-  if [ ! "$(cat OWN_extensions.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5OWNEXTN}" ]; then
+  if [ ! "${CURR_MD5OWNEXTN}" == "${MD5OWNEXTN}" ]; then
     TEMP_COLOR=lcyan; print_color  "The file OWN_extensions.cfg has been edited. It will not be overwritten.\n" unset TEMP_COLOR;
     OWN_ALL_PURPOSE_EXTENSIONS_EDITED=TRUE
   fi
 fi
 
 if [ -f OWN_org_details.cfg ]; then
-  if [ ! "$(cat OWN_org_details.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5OWNORGD}" ]; then
+  if [ ! "${CURR_MD5OWNORGD}" == "${MD5OWNORGD}" ]; then
     TEMP_COLOR=lcyan; print_color  "The file OWN_org_details.cfg has been edited. It will not be overwritten.\n" unset TEMP_COLOR;
     OWN_ORG_DETAILS_EDITED=TRUE
   fi

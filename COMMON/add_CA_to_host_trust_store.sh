@@ -90,6 +90,7 @@ if [ "$SCRIPT_DIR" != "$PUBLISH_DIR" ]; then
     TEMP_COLOR=lred;  print_color "Something went wrong copying files to the directory ${PUBLISH_DIR}\n\n"; unset TEMP_COLOR
   else
     TEMP_COLOR=lgreen;  print_color "Files copied to ${PUBLISH_DIR}\n\n";  unset TEMP_COLOR
+    TEMP_COLOR=lcyan; print_color "Your work in this directory is completed.\nMove to the directory ${PUBLISH_DIR}/HOW_TO/ \nRun the scripts in that directory for instructions on how to use certificates\nwith Mariadb products to secure connections with TLS.\n\n"
   fi
 fi
 

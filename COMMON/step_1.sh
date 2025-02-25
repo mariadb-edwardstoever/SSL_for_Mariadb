@@ -7,12 +7,14 @@ cd $SCRIPT_DIR
 source ${SCRIPT_DIR}/functions.sh
 source ${SCRIPT_DIR}/vars.sh 2>/dev/null
 
+get_current_md5s
+
 if [ "$(basename $SCRIPT_DIR)" == "COMMON" ]; then
   TEMP_COLOR=lred; print_color "Do not run scripts from the COMMON directory. "; unset TEMP_COLOR; print_color "Exiting.\n\n"; exit 1;
 fi
 
 if [ -f vars.sh ]; then
-  if [ ! "$(cat vars.sh | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5VARS_SH}" ]; then
+  if [ ! "${CURR_MD5VARS_SH}" == "${MD5VARS_SH}" ]; then
         TEMP_COLOR=lcyan; print_color  "The file vars.sh has been edited. It will not be overwritten.\n" unset TEMP_COLOR;
         VARS_EDITED=TRUE
   fi

@@ -67,10 +67,47 @@ If you add the file myCA.pem into the trusted root certificates on your work-sta
 to open the URL https://maxscale.widgets-and-gadgetsx.com:8989 without warning that the connection is not secure.
 The initial user/password for login to the admin GUI is admin/mariadb.
 
-After you have the admin GUI running properly, you can 
+After you have the admin GUI running properly, you can configure Maxscale for servers, monitors, services and listeners.
 
+TLS can be configured in two places in Maxscale. The first is in each listener. 
+For example:
+[RCONR-LISTENER]
+port=3306
+service=RCONR
+ssl=true
+ssl_ca=${PUBLISH_DIR}/myCA.pem
+ssl_cert=${DEMOPEM}
+ssl_key=${KEYFILE}
+type=listener
 
+The next place is in each server. You simply make ssl=true, which will turn on SSL for connections to each database. 
+For example:
+[rhdb1]
+address=192.168.8.191
+monitorpw=password
+monitoruser=maxscale
+ssl=true
+type=server
 
+You do not need to specify certificate files for the server connection.
+
+In future versions of maxscale, it is planned that TLS will be default ON for listeners. 
+This means that Maxscale will generate a certificate on startup similar to the 11.4 Mariadb DB server, 
+and you will not have to add certificates to the configuration unless you need to.
+
+MAXCTRL
+With https enabled for the admin GUI, you will need to add a configuration for maxctrl to use https.
+
+Create a file ~/.maxctrl.cnf like this:
+[maxctrl]
+secure
+tls-ca-cert=${PUBLISH_DIR}/myCA.pem
+hosts=maxscale.widgets-and-gadgets.com:8989
+
+You then must change the modal to 600:
+chmod 600 ~/.maxctrl.cnf
+
+Now, maxctrl will work as usual.
 "
 
 printf "${OUTPUT}"

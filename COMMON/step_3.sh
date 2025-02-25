@@ -11,6 +11,8 @@ fi
 source ${SCRIPT_DIR}/functions.sh 
 source ${SCRIPT_DIR}/vars.sh
 
+get_current_md5s
+
 if [ "$(basename $SCRIPT_DIR)" == "COMMON" ]; then
   TEMP_COLOR=lred; print_color "Do not run scripts from the COMMON directory. "; unset TEMP_COLOR; print_color "Exiting.\n\n"; exit 1;
 fi
@@ -34,7 +36,7 @@ if [ ! -f CA_configuration.cfg ]; then
 fi
 
 
-if [ "$(cat CA_configuration.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5CACONFI}" ]; then
+if [ "${CURR_MD5CACONFI}" == "${MD5CACONFI}" ]; then
   TEMP_COLOR=lred; print_color "CA_configuration.cfg has not been edited.\nYou may want to edit that file.\nPress ";
   TEMP_COLOR=lcyan; print_color "c";
   TEMP_COLOR=lred; print_color " to continue with the fantasy company name in that file or press any other key to exit.\n"; unset TEMP_COLOR;
@@ -79,7 +81,7 @@ if [ -f myCA.pem ]; then
 exit 0
 fi
 
-if [ "$(cat CA_configuration.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5CACONFI}" ]; then
+if [ "${CURR_MD5CACONFI}" == "${MD5CACONFI}" ]; then
   TEMP_COLOR=lred; print_color "CA_configuration.cfg has not been edited.\nIt is not necessary to edit the file, but you may want to.\nPress "; 
   TEMP_COLOR=lcyan; print_color "c"; 
   TEMP_COLOR=lred; print_color " to continue anyway or any other key to exit.\n"; unset TEMP_COLOR;

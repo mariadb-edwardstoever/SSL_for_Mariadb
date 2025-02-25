@@ -11,6 +11,8 @@ fi
 source ${SCRIPT_DIR}/vars.sh
 source ${SCRIPT_DIR}/functions.sh
 
+get_current_md5s
+
 if [ "$(basename $SCRIPT_DIR)" == "COMMON" ]; then
   TEMP_COLOR=lred; print_color "Do not run scripts from the COMMON directory. "; unset TEMP_COLOR; print_color "Exiting.\n\n"; exit 1;
 fi
@@ -72,7 +74,7 @@ if [ ! -f ${MY_ORGANIZATION}.key ]; then
 exit 0
 fi
 
-if [ "$(cat OWN_org_details.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5OWNORGD}" ]; then
+if [ "${CURR_MD5OWNORGD}" == "${MD5OWNORGD}" ]; then
   TEMP_COLOR=lred; print_color "OWN_org_details.cfg has not been edited.\nYou definitely want to edit that file.\nPress "; 
   TEMP_COLOR=lcyan; print_color "c"; 
   TEMP_COLOR=lred; print_color " to continue with a fantasy company name or any other key to exit.\n"; unset TEMP_COLOR;
@@ -99,7 +101,7 @@ fi
 
 echo "---"
 
-   if [ "$(cat OWN_extensions.cfg | tr -d "[:space:]" | md5sum |  cut -d' ' -f1)" == "${MD5OWNEXTN}" ]; then
+   if [ "${CURR_MD5OWNEXTN}" == "${MD5OWNEXTN}" ]; then
      TEMP_COLOR=lred; print_color "OWN_extensions.cfg has not been edited.\nYou definitely want to edit the DNS.1 section of that file.\nPress "; 
      TEMP_COLOR=lcyan; print_color "c"; 
      TEMP_COLOR=lred; print_color " to continue with a fantasy company name or any other key to exit.\n"; unset TEMP_COLOR;
@@ -132,7 +134,7 @@ echo "---"
 
    echo "---"
 
-   if [ "$(md5sum myCA.key | awk '{print $1}')" == "${MD5MYCAKEY}" ]; then
+   if [ "${CURR_MD5MYCAKEY}" == "${MD5MYCAKEY}" ]; then
      PROVIDED_KEY_IN_USE=TRUE;
    fi
 
@@ -196,7 +198,7 @@ if [ "$GENERATE_SERVER_CERTIFICATE" == "YES" ]; then
 
    echo "---"
 
-   if [ "$(md5sum myCA.key | awk '{print $1}')" == "${MD5MYCAKEY}" ]; then
+   if [ "${CURR_MD5MYCAKEY}" == "${MD5MYCAKEY}" ]; then
      PROVIDED_KEY_IN_USE=TRUE;
    fi
 
@@ -270,7 +272,7 @@ if [ "$GENERATE_CLIENT_CERTIFICATE" == "YES" ]; then
 
    echo "---"
 
-   if [ "$(md5sum myCA.key | awk '{print $1}')" == "${MD5MYCAKEY}" ]; then
+   if [ "${CURR_MD5MYCAKEY}" == "${MD5MYCAKEY}" ]; then
      PROVIDED_KEY_IN_USE=TRUE;
    fi
 
