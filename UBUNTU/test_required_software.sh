@@ -8,8 +8,8 @@ unset NEED2INSTALL
 get_linux_type;
 
 
-if [ ! "${LINUX_TYPE}" == "DEBIAN" ]; then
-  echo "This does not appear to be Debian GNU/Linux. Exiting."; exit 1
+if [ ! "${LINUX_TYPE}" == "UBUNTU" ]; then
+  echo "This does not appear to be Ubuntu Linux. Exiting."; exit 1
 fi
 
 if [ ! $(which openssl 2>/dev/null) ]; then 

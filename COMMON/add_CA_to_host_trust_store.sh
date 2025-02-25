@@ -18,9 +18,12 @@ get_linux_type;
 
 TEMP_COLOR=lcyan; print_color "Detected Linux Type: ${LINUX_TYPE}\n\n"; unset TEMP_COLOR;
 
-if [ ! "${LINUX_TYPE}" == "DEBIAN" ] && [ ! "${LINUX_TYPE}" == "REDHAT" ]; then
+if [ ! "${LINUX_TYPE}" == "DEBIAN" ] && [ ! "${LINUX_TYPE}" == "REDHAT" ] && [ ! "${LINUX_TYPE}" == "UBUNTU" ]; then
   TEMP_COLOR=lred; print_color "Unsupported Linux type. Exiting.\n\n"; exit 1
 fi 
+
+# UBUNTU CAN USE DEBIAN LOGIC
+if [ "${LINUX_TYPE}" == "UBUNTU" ]; then LINUX_TYPE="DEBIAN"; fi
 
 if [ ! -f myCA.pem ]; then
   TEMP_COLOR=lred; print_color "The file myCA.pem does not exist in $SCRIPT_DIR. "; unset TEMP_COLOR; print_color "\nNothing done.\n"
