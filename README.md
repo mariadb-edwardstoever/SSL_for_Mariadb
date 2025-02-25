@@ -65,6 +65,12 @@ Next, run the script step_4.sh. If created your own CA Certificate, you will nee
 ```
 
 ---
+You can view the certificates:
+```
+./view_CA_pem.sh
+./view_own_pem.sh
+```
+---
 Next, run the script add_CA_to_host_trust_store.sh
 ```
 ./add_CA_to_host_trust_store.sh
