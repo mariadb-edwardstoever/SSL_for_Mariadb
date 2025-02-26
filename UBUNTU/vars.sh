@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+#### REVIEW THE VARIABLES IN THIS FILE. MAKE CHANGES WHERE NECESSARY.
+# Script by Edward Stoever for Mariadb Support
+
+# MY_ORGANIZATION WILL BE USED TO NAME THE FILES OF YOUR SIGNED CERTIFICATES.
+# AVOID USING SPACES OR ODD CHARACTERS. USE [a-z] [A-Z] [0-9] [.-_] 
+# THE NAME YOU USE HERE COULD BE YOUR DOMAIN, OR COMPANY NAME, 
+# OR AN INTENDED PURPOSE SUCH AS maxscale_cert.
+MY_ORGANIZATION='widgets-and-gadgets.com'
+
+##### DEFINE HOW MANY DAYS CERTS WILL REMAIN VALID, 9125 IS 25 YEARS.
+HOW_MANY_DAYS_VALID=9125
+
+##### DEFINE RSA (ACCEPTED VALUES 2048 OR 4096)
+# IN ALMOST ALL CASES, YOU SHOULD USE 2048.
+# IF YOU MUST USE RSA 4096, YOU SHOULD NOT USE THE PROVIDED CA CERTIFICATE. 
+RSA=2048
+
+##### USE PROVIDED CA CERTIFICATE OR CREATE YOUR OWN.
+# IT IS RECOMMENDED TO USE THE PROVIDED CA CERTIFICATE.
+# USING THE PROVIDED CA WILL MAKE IT EASY TO MAINTAIN ALL SELF-CREATED CERTS.
+# THE PROVIDED CA EXPIRES ON DECEMBER 31, 2199, MORE THAN 100 YEARS FROM NOW.
+USE_PROVIDED_CA=YES
+
+#### PUBLISH SIGNED CERTS TO WHAT DIRECTORY
+PUBLISH_DIR=/etc/mariadb/certs
+
+#### GENERATE AN ALL PURPOSE CERTIFICATE
+# MOST PEOPLE WILL ONLY NEED THIS ONE CERTIFICATE.
+# THIS CERTIFICATE CAN BE USED FOR https, database client, database server
+# THIS CERTIFICATE IS USEFUL FOR THE MAXSCALE ADMIN GUI (https)
+GENERATE_ALL_PURPOSE_CERTIFICATE=YES
+
+#### FROM MAXSCALE DOCS -- REGARDING CERTIFICATES SPECIFICALLY MADE FOR SERVER & CLIENT
+# Starting with MaxScale 2.5.20, if the TLS certificate given to MaxScale has 
+# the X509v3 extended key usage information, MaxScale will check it and refuse 
+# to use a certificate with the wrong usage. This means that a certificate with 
+# only clientAuth can only be used with servers and a certificate with only serverAuth 
+# can only be used with listeners. In order to use the same certificate for both 
+# listeners and servers, it must have both the clientAuth and serverAuth usages.
+# NOTE: DOCUMENTATION IS UNCLEAR HERE. You can use the same certificate for both
+# listeners and servers if neither clientAuth nor serverAuth are indicated, meaning
+# these flags are optional. This is what makes the all purpose certificate useful.
+
+#### GENERATE SERVER CERTIFICATE
+# THIS CERTIFICATE CAN BE USED FOR database listener (Mariadb, Maxscale)
+GENERATE_SERVER_CERTIFICATE=NO
+# IF YOU GENERATE A SERVER CERTIFICATE, INCLUDE SERVERAUTH FLAG?
+INCLUDE_SERVERAUTH_FLAG=YES
+
+#### GENERATE CLIENT CERTIFICATE
+# THIS CERTIFICATE CAN BE USED FOR connecting to server with client 
+GENERATE_CLIENT_CERTIFICATE=NO
+# IF YOU GENERATE A SERVER CERTIFICATE, INCLUDE CLIENTAUTH FLAG?
+INCLUDE_CLIENTAUTH_FLAG=YES
