@@ -1,0 +1,1 @@
+../COMMON/add_CA_to_host_trust_store.sh

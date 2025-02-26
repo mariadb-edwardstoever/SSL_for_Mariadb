@@ -77,6 +77,11 @@ echo ""
 unset ERR
 if [ "$SCRIPT_DIR" != "$PUBLISH_DIR" ]; then
   mkdir -p  ${PUBLISH_DIR}/HOW_TO/ || ERR=TRUE
+  CHMODDIR=${PUBLISH_DIR}/HOW_TO
+  if [ -d ${CHMODDIR} ]; then
+    # MAKE ALL DIRECTORIES WITH CORRECT MODE
+    while [ "$CHMODDIR" != "/" ]; do echo "Certifying mode of ${CHMODDIR}"; chmod 755 $CHMODDIR; CHMODDIR=$(dirname "$CHMODDIR"); done
+  fi
   cp  ${MY_ORGANIZATION}.key ${PUBLISH_DIR}/ || ERR=TRUE
   cp *.pem ${PUBLISH_DIR}/ || ERR=TRUE
   cp vars.sh  ${PUBLISH_DIR}
