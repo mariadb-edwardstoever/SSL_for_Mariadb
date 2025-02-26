@@ -22,33 +22,27 @@ if [ ! "${LINUX_TYPE}" == "DEBIAN" ] && [ ! "${LINUX_TYPE}" == "REDHAT" ] && [ !
   TEMP_COLOR=lred; print_color "Unsupported Linux type. Exiting.\n\n"; exit 1
 fi 
 
-# UBUNTU CAN USE DEBIAN LOGIC
-if [ "${LINUX_TYPE}" == "UBUNTU" ]; then LINUX_TYPE="DEBIAN"; fi
-
-# ROCKY CAN USE REDHAT LOGIC
-if [ "${LINUX_TYPE}" == "ROCKYL" ]; then LINUX_TYPE="REDHAT"; fi
-
 if [ ! -f myCA.pem ]; then
   TEMP_COLOR=lred; print_color "The file myCA.pem does not exist in $SCRIPT_DIR. "; unset TEMP_COLOR; print_color "\nNothing done.\n"
 exit 1
 fi
 
-if [ "${LINUX_TYPE}" == "DEBIAN" ] && [ ! -d /usr/local/share/ca-certificates/ ]; then 
+if [ "${LINUX_FAMILY}" == "DEBIAN" ] && [ ! -d /usr/local/share/ca-certificates/ ]; then 
  TEMP_COLOR=lred; print_color "The directory /usr/local/share/ca-certificates/ does not exist. "; unset TEMP_COLOR; print_color "\nNothing done.\n"
  exit 1
 fi
 
-if [ "${LINUX_TYPE}" == "REDHAT" ] && [ ! -d /etc/pki/ca-trust/source/anchors ]; then 
+if [ "${LINUX_FAMILY}" == "REDHAT" ] && [ ! -d /etc/pki/ca-trust/source/anchors ]; then 
   TEMP_COLOR=lred; print_color "The directory /etc/pki/ca-trust/source/anchors does not exist. "; unset TEMP_COLOR; print_color "\nNothing done.\n"
   exit 1
 fi
 
-if [ "${LINUX_TYPE}" == "DEBIAN" ]; then
+if [ "${LINUX_FAMILY}" == "DEBIAN" ]; then
   cp myCA.pem /usr/local/share/ca-certificates/myCA.crt || ERR=true
   update-ca-certificates || ERR=true
 fi
 
-if [ "${LINUX_TYPE}" == "REDHAT" ]; then
+if [ "${LINUX_FAMILY}" == "REDHAT" ]; then
   cp myCA.pem /etc/pki/ca-trust/source/anchors/ || ERR=true
   update-ca-trust extract || ERR=true
 fi

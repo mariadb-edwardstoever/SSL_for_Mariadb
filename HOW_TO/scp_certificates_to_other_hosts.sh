@@ -23,7 +23,8 @@ You can use script ${PUBLISH_DIR}/add_CA_to_host_trust_store.sh to add the CA to
 # Example of the ssh command to the create same directory structure on the remote host:
 ssh root@e177.edw.ee mkdir -p $PUBLISH_DIR/HOW_TO
 
-Verify the mode of each directory in the path to $PUBLISH_DIR/HOW_TO on the remote server. Each should be 755 (drwxr-xr-x).
+Verify the mode of each directory in the path to $PUBLISH_DIR/HOW_TO on the remote server. 
+Each subdirectory should be 755 (drwxr-xr-x).
 
 # Example of the scp command to copy contents of $PUBLISH_DIR and its subdirectories to the remote host:
 scp -r $PUBLISH_DIR/* root@e177.edw.ee:$PUBLISH_DIR/

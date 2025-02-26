@@ -8,8 +8,8 @@ unset NEED2INSTALL
 get_linux_type;
 
 
-if [ ! "${LINUX_TYPE}" == "REDHAT" ]; then
-  echo "This does not appear to be Red Hat Enterprise Linux. Exiting."; exit 1
+if [ ! "${LINUX_TYPE}" == "CENTOS" ]; then
+  echo "This does not appear to be Centos Linux. Exiting."; exit 1
 fi
 
 if [ ! $(which openssl 2>/dev/null) ]; then 

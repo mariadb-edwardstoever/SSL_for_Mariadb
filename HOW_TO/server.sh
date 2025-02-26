@@ -16,7 +16,7 @@ source ${SCRIPT_DIR}/../vars.sh
 source ${SCRIPT_DIR}/../functions.sh
 get_linux_type
 OPTIONS_FILE='/etc/mysql/mariadb.conf.d/zz-custom-ssl-server.cnf' # DEFAULT (DEBIAN)
-if [ "$LINUX_TYPE" == "REDHAT" ]; then OPTIONS_FILE='/etc/my.cnf.d/zz-custom-ssl-server.cnf'; fi
+if [ "$LINUX_FAMILY" == "REDHAT" ]; then OPTIONS_FILE='/etc/my.cnf.d/zz-custom-ssl-server.cnf'; fi
 
 KEYFILE=$(ls $PUBLISH_DIR/$MY_ORGANIZATION.key 2>/dev/null)
 ALLPURPOSEPEM=$(ls $PUBLISH_DIR/$MY_ORGANIZATION.pem 2>/dev/null)

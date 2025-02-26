@@ -16,7 +16,7 @@ source ${SCRIPT_DIR}/../vars.sh
 source ${SCRIPT_DIR}/../functions.sh
 get_linux_type
 
-if [ "$LINUX_TYPE" == "REDHAT" ]; then
+if [ "$LINUX_FAMILY" == "REDHAT" ]; then
   INSTALL_CLIENT="yum install MariaDB-client"
 else
   INSTALL_CLIENT="apt install mariadb-client"

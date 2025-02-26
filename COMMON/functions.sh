@@ -14,6 +14,20 @@ fi
 
 function get_linux_type () {
   LINUX_TYPE=$(cat /etc/os-release | grep PRETTY |cut -d\" -f2 | head -c 7 | sed "s/ //g"| tr '[:lower:]' '[:upper:]')
+  LINUX_FAMILY=${LINUX_TYPE}
+
+  # UBUNTU CAN USE DEBIAN LOGIC
+  if [ "${LINUX_TYPE}" == "UBUNTU" ]; then LINUX_FAMILY="DEBIAN"; fi
+
+  # ROCKY CAN USE REDHAT LOGIC
+  if [ "${LINUX_TYPE}" == "ROCKYL" ]; then LINUX_FAMILY="REDHAT"; fi
+
+  # CENTOS CAN USE REDHAT LOGIC
+  if [ "${LINUX_TYPE}" == "CENTOS" ]; then LINUX_FAMILY="REDHAT"; fi
+
+  # ALMA CAN USE REDHAT LOGIC
+  if [ "${LINUX_TYPE}" == "ALMALIN" ]; then LINUX_FAMILY="REDHAT"; fi
+
 }
 
 function get_current_md5s () {
