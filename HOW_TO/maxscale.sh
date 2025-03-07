@@ -61,10 +61,10 @@ Use systemctl to restart maxscale.
 You can test to see if curl will load the admin portal, recognizing the certificate as valid for https. 
 For example, if the name maxscale.widgets-and-gadgets.com can be resolved from DNS or an entry 
 in /etc/hosts the following curl command should work without error:
-curl  https://maxscale.widgets-and-gadgetsx.com:8989
+curl  https://maxscale.widgets-and-gadgets.com:8989
 
 If you add the file myCA.pem into the trusted root certificates on your work-station, your browser will be able 
-to open the URL https://maxscale.widgets-and-gadgetsx.com:8989 without warning that the connection is not secure.
+to open the URL https://maxscale.widgets-and-gadgets.com:8989 without warning that the connection is not secure.
 The initial user/password for login to the admin GUI is admin/mariadb.
 
 After you have the admin GUI running properly, you can configure Maxscale for servers, monitors, services and listeners.
