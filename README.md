@@ -20,7 +20,7 @@ The goal of this project is to make the task of generating one or more certifica
 * Starting from 11.4, MariaDB server enables TLS automatically. Certificates are generated on startup and stored in memory. Certificate verification is enabled by default on the client side and certificates are verified if the authentication plugin itself is MitM safe (mysql_native_password, ed25519, parsec). If you are using 11.4 software or higher, your connections to the database are secure without having to generate and manage certificates on the server.
 * Even with the advent of 11.4, there are good reasons to use TLS certificates, such as for maxscale. 
 
-## Test that required software is installed on the server.
+## Test to verify that required software is installed on the server.
 Begin by changing directory into your linux distribution (REDHAT or DEBIAN) and run the script test_required_software.sh
 ```
 ./test_required_software.sh
